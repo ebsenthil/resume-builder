@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', linkedin: '',
-    education: '', experience: '', certifications: '',
-    skills: '', jobDescription: ''
+    name: "",
+    email: "",
+    phone: "",
+    linkedin: "",
+    education: "",
+    experience: "",
+    certifications: "",
+    skills: "",
+    jobDescription: "",
   });
-  const [responseUrl, setResponseUrl] = useState('');
+
+  const [resume, setResume] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,39 +24,47 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("https://your-backend-api-url/resume", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    });
-    const data = await res.json();
-    setResponseUrl(data.downloadUrl);
+    setLoading(true);
+    setResume("");
+
+    try {
+      const response = await axios.post(
+        "https://orxicjn7tg.execute-api.us-east-1.amazonaws.com/dev/items",
+        formData
+      );
+      setResume(response.data.resume);
+    } catch (err) {
+      alert("Failed to generate resume: " + err.message);
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="container">
-      <h1>Resume Builder</h1>
+    <div className="App">
+      <h1>AI Resume Generator</h1>
       <form onSubmit={handleSubmit}>
-        {["name", "email", "phone", "linkedin", "education", "experience", "certifications", "skills", "jobDescription"]
-          .map(field => (
-            <div key={field}>
-              <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
-              <textarea
-                name={field}
-                value={formData[field]}
-                onChange={handleChange}
-                required
-                rows={field === "jobDescription" || field === "experience" ? 4 : 2}
-              />
-            </div>
-          ))}
-        <button type="submit">Generate Resume</button>
+        {Object.keys(formData).map((key) => (
+          <div key={key}>
+            <label>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
+            <textarea
+              name={key}
+              value={formData[key]}
+              onChange={handleChange}
+              rows={key === "jobDescription" ? 4 : 2}
+              required
+            />
+          </div>
+        ))}
+        <button type="submit" disabled={loading}>
+          {loading ? "Generating..." : "Generate Resume"}
+        </button>
       </form>
 
-      {responseUrl && (
-        <div className="download-section">
-          <h2>Your resume is ready!</h2>
-          <a href={responseUrl} target="_blank" rel="noreferrer">Download Resume</a>
+      {resume && (
+        <div className="resume-output">
+          <h2>Generated Resume</h2>
+          <pre>{resume}</pre>
         </div>
       )}
     </div>
