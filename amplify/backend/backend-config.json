@@ -1,0 +1,43 @@
+{
+  "api": {
+    "generateresume": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "resumebuilder7f9a0bfe"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "resumebuilder7f9a0bfe": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_resumebuilder7f9a0bfe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "resumebuilder7f9a0bfe"
+        }
+      ]
+    },
+    "AMPLIFY_function_resumebuilder7f9a0bfe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "resumebuilder7f9a0bfe"
+        }
+      ]
+    }
+  }
+}

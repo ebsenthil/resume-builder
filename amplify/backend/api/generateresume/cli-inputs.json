@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "resumebuilder7f9a0bfe",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

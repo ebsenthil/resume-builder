@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-resumebuilder-dev-3ff28-authRole",
+      "UnauthRoleArn": "arn:aws:iam::624561514375:role/amplify-resumebuilder-dev-3ff28-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::624561514375:role/amplify-resumebuilder-dev-3ff28-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-resumebuilder-dev-3ff28-deployment",
+      "UnauthRoleName": "amplify-resumebuilder-dev-3ff28-unauthRole",
+      "StackName": "amplify-resumebuilder-dev-3ff28",
+      "StackId": "arn:aws:cloudformation:us-east-1:624561514375:stack/amplify-resumebuilder-dev-3ff28/8c566ed0-20cb-11f0-90fb-0affefb4c111",
+      "AmplifyAppId": "d246h8s27l30o9"
+    },
+    "categories": {
+      "function": {
+        "resumebuilder7f9a0bfe": {
+          "deploymentBucketName": "amplify-resumebuilder-dev-3ff28-deployment",
+          "s3Key": "amplify-builds/resumebuilder7f9a0bfe-48434249415050644e43-build.zip"
+        }
+      },
+      "api": {
+        "generateresume": {}
+      }
+    }
+  }
+}
